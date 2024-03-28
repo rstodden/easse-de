@@ -1,0 +1,44 @@
+<!doctype html><html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Solarized CSS -->
+    <style type="text/css">body{background-color:#fdf6e3}#markdown-body{box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px;font-family:'Source Sans Pro',sans-serif;font-size:110%;color:#43555a}h1,h2,h3,h4{color:#3e4d52}@media (max-width:767px){.markdown-body{padding:15px}}h2{padding-top:20px!important}a{color:#268bd2;text-decoration:none}a:hover{color:#78b9e6;text-decoration:none;text-shadow:none;border:none}.emph{font-style:italic}.mono{color:#000;font-family:'Source Code Pro',monospace}code,pre{color:#000;font-family:'Source Code Pro',monospace}pre{background:rgba(255,255,255,.12);box-shadow:0 0 10px rgba(0,0,0,.15);padding:10px;width:fit-content}img{background:rgba(255,255,255,.12);box-shadow:0 0 10px rgba(0,0,0,.15);padding:10px}.full{max-width:100%}.full-expanded{max-width:none}.katex{color:#000}.left{text-align:left}p,ul{text-align:justify}</style>
+    <!-- Plotly js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+<body class="container-fluid m-2 mb-5"><h1 class="mt-4">EASSE report</h1><a class="btn btn-link" href="https://forms.gle/J8KVkJsqYe8GvYW46">Any feedback welcome!</a><hr /><h2>Settings:</h2><div class="container-fluid"><ul id="settings-list"><li>lowercasing: False</li><li>tokenizer: spacy</li><li>test set: custom</li><li>metrics: bleu,sari,bertscore</li><li>language:de</li></ul></div><hr /><h2>Test set</h2><hr /><div class="container-fluid"><h4>Custom</h4><table border="1" class="dataframe table table-bordered table-responsive table-striped">
+  <thead class="thead-light">
+    <tr style="text-align: right;">
+      <th></th>
+      <th># of samples</th>
+      <th># of references</th>
+      <th>Words / source</th>
+      <th>Words / reference</th>
+      <th>1-to-1 alignments*</th>
+      <th>1-to-N alignments*</th>
+      <th>N-to-N alignments*</th>
+      <th>N-to-1 alignments*</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Custom</th>
+      <td>500</td>
+      <td>1</td>
+      <td>21.57</td>
+      <td>12.91</td>
+      <td>92.2%</td>
+      <td>1.2%</td>
+      <td>0.0%</td>
+      <td>6.6%</td>
+    </tr>
+  </tbody>
+</table><p class="text-muted">* Alignment detection is not 100% accurate</p></div><h2>Scores</h2><hr /><div class="container-fluid"><h3>System vs. Reference</h3><hr /><table class="table table-bordered table-responsive table-striped"><thead class="thead-light"><tr><th></th><th>BLEU</th><th>SARI</th><th>bertscore_precision</th><th>bertscore_recall</th><th>bertscore_f1</th><th>Compression ratio</th><th>Sentence splits</th><th>Levenshtein similarity</th><th>Exact copies</th><th>Added lemmas proportion</th><th>Deleted lemmas proportion</th><th>Kept lemmas proportion</th><th>Kept words proportion</th><th>Rewritten words proportion</th><th>Lexical complexity score</th><th>Avg. sentence length (in words)</th><th>Avg. number syllables per word</th><th>Avg. parse tree height</th><th>Avg. number clauses</th><th>Avg. max. pos. freq.</th><th>Avg. avg. pos. freq.</th></tr></thead><tbody><tr><th>sockeye-APA-LHA-or-b1.txt</th><td>11.0</td><td>44.93</td><td>0.32</td><td>0.32</td><td>0.32</td><td>0.7</td><td>0.97</td><td>0.43</td><td>0.0</td><td>0.59</td><td>0.72</td><td>0.41</td><td>0.34</td><td>0.08</td><td>8.56</td><td>13.25</td><td>1.82</td><td>4.42</td><td>0.19</td><td>10.23</td><td>5.39</td></tr><tr><th>sockeye-DEplain-APA-or-b1.txt</th><td>3.57</td><td>39.4</td><td>0.25</td><td>0.24</td><td>0.24</td><td>0.68</td><td>1.26</td><td>0.52</td><td>0.0</td><td>0.38</td><td>0.55</td><td>0.62</td><td>0.56</td><td>0.1</td><td>8.36</td><td>11.71</td><td>1.73</td><td>3.98</td><td>0.18</td><td>10.11</td><td>5.18</td></tr><tr><th>Identity baseline (src2src)</th><td>5.47</td><td>4.89</td><td>0.22</td><td>0.33</td><td>0.27</td><td>1.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>0.0</td><td>1.0</td><td>1.0</td><td>0.0</td><td>9.01</td><td>20.48</td><td>1.93</td><td>5.66</td><td>0.19</td><td>10.65</td><td>5.74</td></tr><tr><th>Reference baseline (tgt2tgt)</th><td>100.0</td><td>100.0</td><td>1.0</td><td>1.0</td><td>1.0</td><td>0.68</td><td>0.98</td><td>0.45</td><td>0.0</td><td>0.54</td><td>0.69</td><td>0.46</td><td>0.4</td><td>0.08</td><td>8.64</td><td>12.82</td><td>1.83</td><td>4.36</td><td>0.19</td><td>10.31</td><td>5.47</td></tr><tr><th>Truncate baseline</th><td>4.59</td><td>18.36</td><td>0.22</td><td>0.28</td><td>0.24</td><td>0.79</td><td>1.0</td><td>0.88</td><td>0.0</td><td>0.02</td><td>0.18</td><td>0.98</td><td>0.99</td><td>0.0</td><td>8.98</td><td>16.97</td><td>1.86</td><td>4.77</td><td>0.18</td><td>10.57</td><td>5.51</td></tr></tbody></table><p class="text-muted">* The Reference row represents one of the references (picked randomly) evaluated against the others.</p></div></body></html>

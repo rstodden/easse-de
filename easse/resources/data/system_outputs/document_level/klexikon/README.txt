@@ -1,0 +1,8 @@
+Baselines proposed in the KLexikon paper
+full_wiki_article
+lead_3
+lead_k
+lead_k_simplified
+rouge2_fmeasure
+rouge2_precision
+rouge2_recall

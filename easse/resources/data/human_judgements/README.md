@@ -1,0 +1,3 @@
+* DEplain-web ratings copied from [https://github.com/rstodden/DEPlain](https://github.com/rstodden/DEPlain/tree/main/F__Human_Annotations)
+* DEplain-APA ratings copied from [https://github.com/rstodden/DEPlain](https://github.com/rstodden/DEPlain/tree/main/F__Human_Annotations). This directory just contains the ratings but not the corresponding original and simplified texts, because the texts are published with an resticted license. Please request the access to the full data via [zenodo](https://zenodo.org/record/7674560).
+* TextComplexityDE ratings copied from [https://github.com/babaknaderi/TextComplexityDE](https://github.com/babaknaderi/TextComplexityDE/tree/master/TextComplexityDE19)

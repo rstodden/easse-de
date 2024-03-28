@@ -1,11 +1,9 @@
 from typing import List
-import os
 
-from stanfordnlp.server import CoreNLPClient
+from stanza.server import CoreNLPClient
 from tqdm import tqdm
 
 from easse.utils.resources import download_stanford_corenlp
-from easse.utils.constants import STANFORD_CORENLP_DIR
 
 
 def _format_token_info(sent_json):
@@ -127,9 +125,9 @@ def syntactic_parse_texts(
         "depparse.model": "edu/stanford/nlp/models/parser/nndep/english_SD.gz",
         "outputFormat": "json",
     }
-    if not STANFORD_CORENLP_DIR.exists():
-        download_stanford_corenlp()
-    os.environ["CORENLP_HOME"] = str(STANFORD_CORENLP_DIR)
+    # if not STANFORD_CORENLP_DIR.exists():
+    download_stanford_corenlp()
+    # os.environ["CORENLP_HOME"] = str(STANFORD_CORENLP_DIR)
 
     parse_results = []
 

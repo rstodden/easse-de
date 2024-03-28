@@ -2,9 +2,9 @@
 Implements the evaluation metrics based on BLEU score
 """
 
-import numpy as np
 from typing import List
 
+import numpy as np
 from sacrebleu.metrics import BLEU
 
 import easse.utils.preprocessing as utils_prep
@@ -16,12 +16,8 @@ def corpus_bleu(
     smooth_method: str = "exp",
     smooth_value: float = None,
     force: bool = True,
-    lowercase: bool = False,
-    tokenizer: str = "13a",
     effective_order: bool = False,
 ):
-    sys_sents = [utils_prep.normalize(sent, lowercase, tokenizer) for sent in sys_sents]
-    refs_sents = [[utils_prep.normalize(sent, lowercase, tokenizer) for sent in ref_sents] for ref_sents in refs_sents]
 
     bleu_scorer = BLEU(lowercase=False, force=force, tokenize="none", smooth_method=smooth_method, smooth_value=smooth_value, effective_order=effective_order)
 
@@ -36,8 +32,6 @@ def sentence_bleu(
     ref_sents: List[str],
     smooth_method: str = "floor",
     smooth_value: float = None,
-    lowercase: bool = False,
-    tokenizer: str = "13a",
     effective_order: bool = True,
 ):
 
@@ -47,8 +41,6 @@ def sentence_bleu(
         smooth_method,
         smooth_value,
         force=True,
-        lowercase=lowercase,
-        tokenizer=tokenizer,
         effective_order=effective_order,
     )
 
@@ -58,8 +50,6 @@ def corpus_averaged_sentence_bleu(
     refs_sents: List[List[str]],
     smooth_method: str = "floor",
     smooth_value: float = None,
-    lowercase: bool = False,
-    tokenizer: str = "13a",
     effective_order: bool = True,
 ):
 
@@ -71,8 +61,6 @@ def corpus_averaged_sentence_bleu(
                 ref_sents,
                 smooth_method,
                 smooth_value,
-                lowercase=lowercase,
-                tokenizer=tokenizer,
                 effective_order=effective_order,
             )
         )

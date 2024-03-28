@@ -1,7 +1,8 @@
 import pytest
-from easse.utils.ucca_utils import get_scenes_text, ucca_parse_texts
+
 from easse.samsa import sentence_samsa, corpus_samsa
 from easse.utils.resources import get_orig_sents, get_refs_sents
+from easse.utils.ucca_utils import get_scenes_text, ucca_parse_texts
 
 
 def test_get_scenes():
@@ -78,7 +79,7 @@ def test_sentence_samsa():
 
 
 def test_corpus_samsa():
-    orig_sents = get_orig_sents('qats_test')
-    refs_sents = get_refs_sents('qats_test')
+    orig_sents = get_orig_sents('qats_test', input_level="sentence-level")
+    refs_sents = get_refs_sents('qats_test', input_level="sentence-level")
     samsa_score = corpus_samsa(orig_sents, refs_sents[0], lowercase=False, tokenizer='moses')
     assert samsa_score == pytest.approx(36.94996509406232)

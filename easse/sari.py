@@ -1,6 +1,9 @@
 from collections import Counter
 from typing import List
+# from easse.d_sari import D_SARIsent
 import easse.utils.preprocessing as utils_prep
+from easse.utils.constants import LANGUAGE
+import numpy as np
 
 NGRAM_ORDER = 4
 
@@ -234,6 +237,7 @@ def get_corpus_sari_operation_scores(
     legacy=False,
     use_f1_for_deletion=True,
     use_paper_version=False,
+    tokenizer_obj=None,
 ):
     """
     Inputs:
@@ -245,14 +249,12 @@ def get_corpus_sari_operation_scores(
     are further tokenized.
     In addition, it assumes that all sentences are already lowercased.
     """
-    if legacy:
-        lowercase = False
-    else:
-        orig_sents = [utils_prep.normalize(sent, lowercase, tokenizer) for sent in orig_sents]
-
-    sys_sents = [utils_prep.normalize(sent, lowercase, tokenizer) for sent in sys_sents]
-    refs_sents = [[utils_prep.normalize(sent, lowercase, tokenizer) for sent in ref_sents] for ref_sents in refs_sents]
-
+	# todo: legacy mode not working currently
+    # if legacy:
+    #     lowercase = False
+    # else:
+    #     orig_sents = [utils_prep.normalize(sent, lowercase, tokenizer, tokenizer_obj=tokenizer_obj) for sent in orig_sents]
+    # print(orig_sents[:5], [utils_prep.normalize(sent, lowercase, tokenizer, tokenizer_obj=tokenizer_obj) for sent in orig_sents[:5]])
     stats = compute_ngram_stats(orig_sents, sys_sents, refs_sents)
 
     if not use_paper_version:
@@ -265,3 +267,71 @@ def get_corpus_sari_operation_scores(
 def corpus_sari(*args, **kwargs):
     add_score, keep_score, del_score = get_corpus_sari_operation_scores(*args, **kwargs)
     return (add_score + keep_score + del_score) / 3
+
+# todo: solve problems with D-SARI
+# - cannot reproduce scores of original SARI with EASSE, only add score.
+# - wrong order or wrong naming in arguments in D-SARI (original and system simplifications mixed)
+# - can reproduce D-SARI with code as reported in their paper.
+# - maybe recalculate manually?
+
+# def document_sari(
+#     orig_sents: str,
+#     sys_sents: str,
+#     refs_sents: List[str],
+#     lowercase: bool = False,
+#     tokenizer: str = "13a",
+#     language: str = LANGUAGE,
+#     tokenizer_obj=None):
+#     """
+#     SARI of only 1 document!
+#     """
+#     # return corpus_document_sari([orig_sents], [sys_sents], [[ref] for ref in refs_sents], lowercase=lowercase,
+#     #                             tokenizer=tokenizer, language=language, tokenizer_obj=tokenizer_obj)
+#     return D_SARIsent(sys_sents, orig_sents, refs_sents)
+#
+#
+# def corpus_averaged_document_sari(
+#     orig_sents: List[str],
+#     sys_sents: List[str],
+#     refs_sents: List[List[str]],
+#     lowercase: bool = False,
+#     tokenizer: str = "13a",
+#     language: str = LANGUAGE,
+#     tokenizer_obj=None):
+#     scores = []
+#     for sys_sent, orig_sent, *ref_sents in zip(sys_sents, orig_sents, *refs_sents):
+#         scores.append(document_sari(orig_sent, sys_sent, ref_sents, lowercase, tokenizer, language, tokenizer_obj))
+#     return np.mean(scores)
+#
+#
+# def get_corpus_document_sari_operation_scores(
+#     orig_sents: List[str],
+#     sys_sents: List[str],
+#     refs_sents: List[List[str]],
+#     lowercase: bool = False,
+#     tokenizer: str = "13a",
+#     tokenizer_obj=None):
+#     D_SARIsent(sys_sents, orig_sents, refs_sents)
+#
+#     sys_sents = [utils_prep.normalize(sent, lowercase, tokenizer, tokenizer_obj=tokenizer_obj) for sent in sys_sents]
+#     orig_sents = [utils_prep.normalize(sent, lowercase, tokenizer, tokenizer_obj=tokenizer_obj) for sent in orig_sents]
+#     refs_sents = [[utils_prep.normalize(sent, lowercase, tokenizer, tokenizer_obj=tokenizer_obj) for sent in ref_sents] for ref_sents in refs_sents]
+#
+#     full_score, keep_score, del_score, add_score = D_SARIsent(sys_sents, orig_sents, refs_sents)
+#     return keep_score, del_score, add_score
+#
+#
+# def corpus_document_sari(
+#     orig_sents: List[str],
+#     sys_sents: List[str],
+#     refs_sents: List[List[str]],
+#     lowercase: bool = False,
+#     tokenizer: str = "13a",
+#     language: str = LANGUAGE,
+#     tokenizer_obj=None):
+#     """
+#     D-SARI score based on add, keep and delete scores
+#     """
+#     keep_score, del_score, add_score = get_corpus_document_sari_operation_scores(orig_sents, sys_sents, refs_sents,
+#                                                                                  lowercase, tokenizer, tokenizer_obj)
+#     return (add_score + keep_score + del_score) / 3

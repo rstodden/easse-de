@@ -113,3 +113,61 @@ tools/
 # VSCode
 .VSCode
 
+# keep directories of document-level resources
+/easse/resources/data/test_sets/document_level/20Minuten/*
+!/easse/resources/data/test_sets/document_level/20Minuten/.gitkeep
+
+
+/easse/resources/data/test_sets/document_level/DEplain-APA/*
+!/easse/resources/data/test_sets/document_level/DEplain-APA/.gitkeep
+!/easse/resources/data/test_sets/document_level/DEplain-APA/README.md
+
+/easse/resources/data/test_sets/document_level/DEplain-web/manual-private/*
+!/easse/resources/data/test_sets/document_level/DEplain-web/manual-private/.gitkeep
+/easse/resources/data/test_sets/document_level/DEplain-web/manual-public/*
+!/easse/resources/data/test_sets/document_level/DEplain-web/manual-public/.gitkeep
+/easse/resources/data/test_sets/document_level/DEplain-web/auto-public/*
+!/easse/resources/data/test_sets/document_level/DEplain-web/auto-public/.gitkeep
+!/easse/resources/data/test_sets/document_level/DEplain-web/README.md
+
+/easse/resources/data/test_sets/document_level/hda_easy_to_read_langauge/*
+!/easse/resources/data/test_sets/document_level/hda_easy_to_read_langauge/.gitkeep
+
+/easse/resources/data/test_sets/document_level/klexikon/*
+!/easse/resources/data/test_sets/document_level/klexikon/.gitkeep
+
+# keep directories of document-level resources
+/easse/resources/data/test_sets/sentence_level/APA_LHAor-a2/*
+!/easse/resources/data/test_sets/sentence_level/APA_LHAor-a2/.gitkeep
+/easse/resources/data/test_sets/sentence_level/APA_LHAor-b1/*
+!/easse/resources/data/test_sets/sentence_level/APA_LHAor-b1/.gitkeep
+
+/easse/resources/data/test_sets/sentence_level/DEplain-APA/*
+!/easse/resources/data/test_sets/sentence_level/DEplain-APA/.gitkeep
+!/easse/resources/data/test_sets/sentence_level/DEplain-APA/README.md
+
+/easse/resources/data/test_sets/sentence_level/simple-german-corpus/*
+!/easse/resources/data/test_sets/sentence_level/simple-german-corpus/.gitkeep
+!/easse/resources/data/test_sets/sentence_level/simple-german-corpus/LICENSE.md
+
+/easse/resources/data/test_sets/sentence_level/DEplain-web/manual-private/*
+!/easse/resources/data/test_sets/sentence_level/DEplain-web/manual-private/.gitkeep
+# /easse/resources/data/test_sets/sentence_level/DEplain-web/manual-public/*
+!/easse/resources/data/test_sets/sentence_level/DEplain-web/manual-public/.gitkeep
+
+# /easse/resources/data/test_sets/sentence_level/TextComplexityDE/*
+!/easse/resources/data/test_sets/sentence_level/TextComplexityDE/.gitkeep
+
+# /easse/resources/data/test_sets/sentence_level/geolino/*
+!/easse/resources/data/test_sets/sentence_level/geolino/.gitkeep
+
+easse-de/easse/resources/data/system_outputs/document_level/DEplain-APA/*
+!easse-de/easse/resources/data/system_outputs/document_level/DEplain-APA/.gitkeep
+
+
+easse-de/easse/resources/data/system_outputs/sentence_level/DEplain-APA/*
+!easse-de/easse/resources/data/system_outputs/sentence_level/DEplain-APA/.gitkeep
+
+easse-de/easse/resources/data/system_outputs/sentence_level/APA_LHAor-*/*
+easse-de/easse/resources/data/system_outputs/sentence_level/simple-german-corpus/*
+

@@ -24,6 +24,7 @@ class FKGLScorer:
 
     def score(self):
         # Flesch-Kincaid grade level
+        # print(self.nb_words, self.nb_syllables, self.nb_sentences)
         if self.nb_sentences == 0 or self.nb_words == 0:
             return 0
         return max(
@@ -32,8 +33,8 @@ class FKGLScorer:
         )
 
 
-def corpus_fkgl(sentences: List[str], tokenizer: str = "13a"):
+def corpus_fkgl(sentences: List[str], ):
     scorer = FKGLScorer()
     for sentence in sentences:
-        scorer.add(normalize(sentence, tokenizer=tokenizer))
+        scorer.add(sentence)
     return scorer.score()

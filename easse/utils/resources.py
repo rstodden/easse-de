@@ -3,18 +3,22 @@ import os
 import sys
 import tarfile
 import time
-from urllib.request import urlretrieve
 import warnings
 import zipfile
+from urllib.request import urlretrieve
+
+import stanza
 
 from easse.utils.constants import (
-    STANFORD_CORENLP_DIR,
     UCCA_DIR,
     UCCA_PARSER_PATH,
-    TEST_SETS_PATHS,
-    SYSTEM_OUTPUTS_DIRS_MAP,
+    TEST_SETS_PATHS_SENTENCE_LEVEL,
+    TEST_SETS_PATHS_DOCUMENT_LEVEL,
+    SYSTEM_OUTPUTS_DIRS_MAP_DOCUMENT_LEVEL,
+    SYSTEM_OUTPUTS_DIRS_MAP_SENTENCE_LEVEL,
 )
 from easse.utils.helpers import get_temp_filepath, read_lines, safe_divide
+
 
 def reporthook(count, block_size, total_size):
     # Download progress bar
@@ -52,11 +56,7 @@ def untar(compressed_path, output_dir):
 
 
 def download_stanford_corenlp():
-    url = 'http://nlp.stanford.edu/software/stanford-corenlp-full-2018-10-05.zip'
-    temp_filepath = get_temp_filepath(create=True)
-    download(url, temp_filepath)
-    STANFORD_CORENLP_DIR.mkdir(parents=True, exist_ok=True)
-    unzip(temp_filepath, STANFORD_CORENLP_DIR.parent)
+    stanza.install_corenlp()
 
 
 def update_ucca_path():
@@ -91,15 +91,31 @@ def maybe_map_deprecated_test_set_to_new_test_set(test_set):
     return test_set
 
 
-def get_orig_sents(test_set):
+def get_orig_sents(test_set, input_level):
     test_set = maybe_map_deprecated_test_set_to_new_test_set(test_set)
-    return read_lines(TEST_SETS_PATHS[(test_set, 'orig')])
+    if input_level == "sentence-level":
+        return read_lines(TEST_SETS_PATHS_SENTENCE_LEVEL[(test_set, 'orig')])
+    elif input_level == "document-level":
+        return read_lines(TEST_SETS_PATHS_DOCUMENT_LEVEL[(test_set, 'orig')])
+    else:
+        raise ValueError(input_level+" is not supported.")
 
 
-def get_refs_sents(test_set):
+def get_refs_sents(test_set, input_level):
     test_set = maybe_map_deprecated_test_set_to_new_test_set(test_set)
-    return [read_lines(ref_sents_path) for ref_sents_path in TEST_SETS_PATHS[(test_set, 'refs')]]
+    if input_level == "sentence-level":
+        return [read_lines(ref_sents_path) for ref_sents_path in TEST_SETS_PATHS_SENTENCE_LEVEL[(test_set, 'refs')]]
+    elif input_level == "document-level":
+        return [read_lines(ref_sents_path) for ref_sents_path in TEST_SETS_PATHS_DOCUMENT_LEVEL[(test_set, 'refs')]]
+    else:
+        raise ValueError(input_level + " is not supported.")
 
 
-def get_system_outputs_dir(test_set):
-    return SYSTEM_OUTPUTS_DIRS_MAP[test_set]
+def get_system_outputs_dir(test_set, input_level):
+    if input_level == "sentence-level":
+        return SYSTEM_OUTPUTS_DIRS_MAP_SENTENCE_LEVEL[test_set]
+    elif input_level == "document-level":
+        return SYSTEM_OUTPUTS_DIRS_MAP_DOCUMENT_LEVEL[test_set]
+    else:
+        raise ValueError(input_level + " is not supported.")
+

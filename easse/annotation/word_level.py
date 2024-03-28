@@ -1,20 +1,19 @@
 """
 This module contains functions for annotating simplification operations at the word-level.
 """
-from typing import List
-from operator import itemgetter
 import string
+from operator import itemgetter
+from typing import List
 
 import numpy as np
-from tqdm import tqdm
+from nltk.tree import ParentedTree
 from simalign import SentenceAligner
 from sklearn.metrics import f1_score
-from nltk.tree import ParentedTree
+from tqdm import tqdm
 
-from easse.aligner.corenlp_utils import syntactic_parse_texts, posTag
-from easse.aligner.aligner import MonolingualWordAligner
 import easse.utils.preprocessing as utils_prep
-
+from easse.aligner.aligner import MonolingualWordAligner
+from easse.aligner.corenlp_utils import syntactic_parse_texts, posTag
 
 # =============================================================================
 # Constants
@@ -347,6 +346,7 @@ class WordOperationAnnotator:
         lowercase: bool = False,
         tokenizer: str = "moses",
         verbose: bool = False,
+        tokenizer_obj = None,
     ):
         if align_tool == "simalign":
             matching_methods = {"inter": "a", "mwmf": "m", "itermax": "i"}
@@ -367,6 +367,7 @@ class WordOperationAnnotator:
         self._lowercase = lowercase
         self._tokenizer = tokenizer
         self._verbose = verbose
+        self._tokenizer_obj = tokenizer_obj
 
     def analyse_operations(
         self,
@@ -431,8 +432,8 @@ class WordOperationAnnotator:
         return np.stack(sentence_scores, axis=0)
 
     def identify_operations(self, orig_sentences: List[str], simp_sentences: List[str]):
-        orig_sentences = [utils_prep.normalize(sent, self._lowercase, self._tokenizer) for sent in orig_sentences]
-        simp_sentences = [utils_prep.normalize(sent, self._lowercase, self._tokenizer) for sent in simp_sentences]
+        orig_sentences = [utils_prep.normalize(sent, self._lowercase, self._tokenizer, self._tokenizer_obj) for sent in orig_sentences]
+        simp_sentences = [utils_prep.normalize(sent, self._lowercase, self._tokenizer, self._tokenizer_obj) for sent in simp_sentences]
 
         all_parses = syntactic_parse_texts(
             orig_sentences + simp_sentences,

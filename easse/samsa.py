@@ -1,20 +1,22 @@
 from typing import List
+
 import numpy as np
 from tqdm import tqdm
 
-from easse.utils.ucca_utils import (
-    get_scenes_ucca,
-    get_scenes_text,
-    ucca_parse_texts,
-    flatten_unit,
-    Passage,
-)
+import easse.utils.preprocessing as utils_prep
 from easse.aligner.aligner import MonolingualWordAligner
 from easse.aligner.corenlp_utils import syntactic_parse_texts
-import easse.utils.preprocessing as utils_prep
+from easse.utils.ucca_utils import (
+	get_scenes_ucca,
+	get_scenes_text,
+	ucca_parse_texts,
+	flatten_unit,
+	Passage,
+)
 
 
-def syntactic_parse_ucca_scenes(ucca_passages, tokenize=False, sentence_split=False, verbose=False):
+def syntactic_parse_ucca_scenes(ucca_passages, tokenize=False, sentence_split=False, verbose=False,):
+                                # tokenizer_obj=None
     # Gather all scenes together to make a single call to the syntactic parser
     scenes_per_passage = []
     all_scenes = []
@@ -266,13 +268,10 @@ def compute_samsa(orig_ucca_passage: Passage, orig_synt_scenes, sys_synt_sents):
 def get_samsa_sentence_scores(
     orig_sents: List[str],
     sys_sents: List[str],
-    lowercase: bool = False,
-    tokenizer: str = "13a",
     verbose: bool = False,
 ):
     print("Warning: SAMSA metric is long to compute (120 sentences ~ 4min), disable it if you need fast evaluation.")
 
-    orig_sents = [utils_prep.normalize(sent, lowercase, tokenizer) for sent in orig_sents]
     orig_ucca_passages = ucca_parse_texts(orig_sents)
     orig_synt_scenes = syntactic_parse_ucca_scenes(
         orig_ucca_passages,
@@ -281,7 +280,6 @@ def get_samsa_sentence_scores(
         verbose=verbose,
     )
 
-    sys_sents = [utils_prep.normalize(output, lowercase, tokenizer) for output in sys_sents]
     sys_sents_synt = syntactic_parse_texts(sys_sents, tokenize=False, sentence_split=True, verbose=verbose)
 
     sentences_scores = []
@@ -297,19 +295,19 @@ def get_samsa_sentence_scores(
 def corpus_samsa(
     orig_sents: List[str],
     sys_sents: List[str],
-    lowercase: bool = False,
-    tokenizer: str = "13a",
     verbose: bool = False,
 ):
 
-    return np.mean(get_samsa_sentence_scores(orig_sents, sys_sents, lowercase, tokenizer, verbose))
+    return np.mean(get_samsa_sentence_scores(orig_sents, sys_sents, 
+                                             verbose, 
+                                            ))
 
 
 def sentence_samsa(
     orig_sent: str,
     sys_sent: str,
-    lowercase: bool = False,
-    tokenizer: str = "13a",
     verbose: bool = False,
 ):
-    return get_samsa_sentence_scores([orig_sent], [sys_sent], lowercase, tokenizer, verbose)[0]
+    return get_samsa_sentence_scores([orig_sent], [sys_sent], 
+                                     verbose, 
+                                    )[0]

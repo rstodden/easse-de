@@ -198,29 +198,38 @@ EASSE is licenced under the GNU General Public License v3.0.
 If you use EASSE-multi in your research, please cite the original EASSE paper and the EASSE-DE paper. If you use the system generations or reproducability code please also cite our reproduction paper.
 
 ### Reproduction paper:
-[Reproduction & Benchmark of German Text Simplification Systems](https://github.com/rstodden/easse-de)
+
+Regina Stodden. 2024 (to appear). [Reproduction & Benchmark of German Text Simplification Systems](https://github.com/rstodden/easse-de). In *Proceedings of the 1st Workshop on Evaluating Text Difficulty in a Multilingual Context (DeTermIt!)*, Turino, Italy.
+
 ```
 @inproceedings{stodden-2024-reproduction,
     author = {Regina Stodden},
     title = {{Reproduction \& Benchmark of German Text Simplification Systems}},
     booktitle = "Proceedings of the 1st Workshop on Evaluating Text Difficulty in a Multilingual Context (DeTermIt!)",
     year = {2024 (to appear)},
-    address = "Turino, Italy"
-}```
+   address = "Turino, Italy"
+}
+```
 
 ### EASSE-DE:
-[EASSE-DE: Easier Automatic Sentence Simplification Evaluation for German TS](https://github.com/rstodden/easse-de)
+
+Regina Stodden. 2024. [EASSE-DE: Easier Automatic Sentence Simplification Evaluation for German](https://github.com/rstodden/easse-de). *ArXiv preprint, arXiv:2404.03563*.
+
 ```
-@unpublished{stodden-2024-easse,
+@misc{stodden-2024-easse,
     author = {Regina Stodden},
-    title = {{EASSE-DE: Easier Automatic Sentence Simplification Evaluation for German TS}},
-    note = "tbc.",
-    year = {2024}
+      title={{EASSE-DE: Easier Automatic Sentence Simplification Evaluation for German}}, 
+      year={2024},
+      eprint={2404.03563},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+    url = {https://arxiv.org/abs/2404.03563},
+    note = {arXiv preprint, arXiv:2404.03563}
 }
 ```
 
 ### Original EASSE paper: 
-[EASSE: Easier Automatic Sentence Simplification Evaluation](https://aclanthology.org/D19-3009/)
+Fernando Alva-Manchego, Louis Martin, Carolina Scarton, and Lucia Specia. 2019. [EASSE: Easier Automatic Sentence Simplification Evaluation](https://aclanthology.org/D19-3009/). In *Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP): System Demonstrations*, pages 49–54, Hong Kong, China. Association for Computational Linguistics.
 
 ```
 @inproceedings{alva-manchego-etal-2019-easse,

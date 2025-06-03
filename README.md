@@ -16,7 +16,7 @@ We edited EASSE to evaluate German simplification systems. We made the following
 - added an [interpretation sheet](easse/Metric_Interpretation.md) for readability metrics
 - added identity baseline (source text copied) 
 - added multi-lingual tokenizer (i.e., spacy)
-- chaged tseval from English version (https://github.com/facebookresearch/text-simplification-evaluation) to multilingual version (https://github.com/rstodden/text-simplification-evaluation)
+- changed tseval from English version (https://github.com/facebookresearch/text-simplification-evaluation) to multilingual version (https://github.com/rstodden/text-simplification-evaluation)
 
 
 ### Features
@@ -34,17 +34,14 @@ We edited EASSE to evaluate German simplification systems. We made the following
 ## Installation
 ### Requirements
 
-Python 3.6 or 3.7 is required. 
-In Python 3.8, the nltk.tokenizer sentence splitter splits the sentence differently, hence the test does not work anymore. 
-For example, the sentence "presidential candidate john f . kennedy proposed the peace corps on the steps of michigan union in 1960 ." 
-is plit into sentences in 3.7 but not in 3.8.
+Latest tested with Python 3.12.
 
 ### Installing from Source
 
 Install EASSE by running:
 
 ```
-git clone https://github.com/feralvam/easse.git
+git clone https://github.com/rstodden/easse-de.git
 cd easse
 pip install -e .
 ```
@@ -130,25 +127,19 @@ Options:
                                   test set to use.  [required]
   -p, --report_path PATH          Path to the output HTML report.
   -h, --help                      Show this message and exit.
+ ```
+
+
+German example DEplain-web:
 ```
-Reproduce EN-example:
+shell
+easse report -m "sari,fre,bleu,bertscore" --no-lowercase -tok "spacy" -t custom --orig_sents_path ./resources/data/test_sets/sentence_level/DEplain-web/manual-public/DEplain-web-manual-public.test.org --refs_sents_paths ./resources/data/test_sets/sentence_level/DEplain-web/manual-public/DEplain-web-manual-public.test.simp --sys_sents_path ./resources/data/system_outputs/sentence_level/DEplain-web/test/DEplain_trimmed_mbart_sents_apa_web.txt,./resources/data/system_outputs/sentence_level/DEplain-web/test/mt5_DEplain-APA.txt -p test.html
 ```
-easse report -t turkcorpus_test_legacy -m 'bleu,sari,fkgl' -tok "13a" -lc -p "report_access.html" --sys_sents_path easse/resources/data/system_outputs/turkcorpus/test/tok.low/ACCESS.tok.low
-```
+The results in the report should be the same as in Table 6 of Stodden (2024a, https://aclanthology.org/2024.determit-1.1/).
+
 <img src="https://github.com/feralvam/easse/blob/master/demo/report.gif">
 
-German example APALHA:
-```shell
-easse report -t custom --orig_sents_path ../LongFormer/results_20221201/APALHA/a2_test_or.txt -
--refs_sents_paths ../LongFormer/results_20221201/APALHA/a2_test_si.txt -m 'bleu,sari,fkgl' -tok "13a" --no-lc -p "../LongFormer/results_20221201/APALHA/report_apalha_longmbart.html" --sys_sents_path ../LongFormer/results_20221201/APALHA/LongMBart.txt
 
-```
-
-German example DEASY:
-```shell
-easse report -t custom --orig_sents_path ../LongFormer/results_20221201/DEASY_2/test_OR.txt --r
-efs_sents_paths ../LongFormer/results_20221201/DEASY_2/test_SI.txt -m 'bleu,sari,fkgl,fre_corpus,fre_sent,bertscore,wiener_sachtextformel_1_sent,wiener_sachtextformel_1_corpus' -tok "13a" --no-lc -p "../LongFormer/results_20221201/DEASY_2/report_all.html" --sys_sents_path ../LongFormer/results_20221201/DEASY_2/LongMBart.txt,../LongFormer/results_20221201/DEASY_2/MBart.txt,../LongFormer/results_20221201/DEASY_2/TrimmedLongMBart.txt,../LongFormer/results_20221201/DEASY_2/TrimmedMBart.txt
-```
 
 ### Python
 
@@ -199,8 +190,7 @@ If you use EASSE-multi in your research, please cite the original EASSE paper an
 
 ### Reproduction paper:
 
-Regina Stodden. 2024 (to appear). [Reproduction & Benchmark of German Text Simplification Systems](https://github.com/rstodden/easse-de). In *Proceedings of the 1st Workshop on Evaluating Text Difficulty in a Multilingual Context (DeTermIt!)*, Turino, Italy.
-
+Regina Stodden. 2024a. [Reproduction & Benchmarking of German Text Simplification Systems](https://aclanthology.org/2024.determit-1.1/). In Proceedings of the Workshop on DeTermIt! Evaluating Text Difficulty in a Multilingual Context @ LREC-COLING 2024, pages 1–15, Torino, Italia. ELRA and ICCL.
 ```
 @inproceedings{stodden-2024-reproduction,
     author = {Regina Stodden},
@@ -213,8 +203,7 @@ Regina Stodden. 2024 (to appear). [Reproduction & Benchmark of German Text Simpl
 
 ### EASSE-DE:
 
-Regina Stodden. 2024. [EASSE-DE: Easier Automatic Sentence Simplification Evaluation for German](https://github.com/rstodden/easse-de). *ArXiv preprint, arXiv:2404.03563*.
-
+Regina Stodden. 2024b. [EASSE-DE & EASSE-multi: Easier Automatic Sentence Simplification Evaluation for German & Multiple Languages](https://aclanthology.org/2024.tsar-1.11/). In Proceedings of the Third Workshop on Text Simplification, Accessibility and Readability (TSAR 2024), pages 107–116, Miami, Florida, USA. Association for Computational Linguistics.
 ```
 @misc{stodden-2024-easse,
     author = {Regina Stodden},

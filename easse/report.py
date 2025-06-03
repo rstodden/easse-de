@@ -320,10 +320,20 @@ def get_test_set_description_html(test_set, orig_sents_tok, refs_sents_tok, orig
 
     def modified_count_sentences(sent, lang):
         return max(count_sentences(sent, lang), 1)
-
-    orig_sent_counts = np.vectorize(modified_count_sentences)(orig_sents_nlp, lang)
+    sents_length = list()
+    for sent in orig_sents_nlp:
+        sents_length.append(count_sentences(sent, lang))
+    orig_sent_counts = np.array(sents_length)
+    # orig_sent_counts = np.vectorize(modified_count_sentences)(orig_sents_nlp, lang)
     expanded_orig_sent_counts = np.expand_dims(orig_sent_counts, 0).repeat(len(refs_sents_tok), axis=0)
-    refs_sent_counts = np.vectorize(modified_count_sentences)(refs_sents_nlp, lang)
+    # refs_sent_counts = np.vectorize(modified_count_sentences)(refs_sents_nlp, lang)
+    ref_sents_length = list()
+    for ref_sents in refs_sents_nlp:
+        ref_sent_length = list()
+        for sent in ref_sents:
+            ref_sent_length.append(count_sentences(sent, lang))
+        ref_sents_length.append(ref_sent_length)
+    refs_sent_counts = np.array(ref_sents_length)
     ratio = np.average((expanded_orig_sent_counts == 1) & (refs_sent_counts == 1))
     df.loc[test_set, '1-to-1 alignments*'] = f'{ratio*100:.1f}%'
     ratio = np.average((expanded_orig_sent_counts == 1) & (refs_sent_counts > 1))

@@ -1,5 +1,7 @@
 from typing import List
 
+import numpy as np
+
 from tseval.feature_extraction import (
 	get_compression_ratio,
 	count_sentence_splits,
@@ -60,13 +62,15 @@ def corpus_quality_estimation(
         'Kept lemmas proportion': get_average_pair(get_kept_words_proportion, orig_sentences, sys_sentences, language),  # based on lemma
         'Kept words proportion': get_average_pair(get_unchanged_words_proportion, orig_sentences, sys_sentences, language),  # based on token
         'Rewritten words proportion': get_average_pair(get_rewritten_words_proportion, orig_sentences, sys_sentences, language),
-        'Lexical complexity score': get_average_pair(
-            wrap_single_sentence_vectorizer(get_wordrank_score), orig_sentences, sys_sentences, language
-        ),
+        # 'Lexical complexity score': get_average_pair(
+        #     wrap_single_sentence_vectorizer(get_wordrank_score), orig_sentences, sys_sentences, language
+        # ),
         'Avg. sentence length (in words)': get_average_sent(count_words_per_sentence, sys_sentences, language),
         'Avg. number syllables per word': get_average_sent(count_syllables_per_word, sys_sentences, language),
         'Avg. parse tree height': get_average_sent(get_parse_tree_height, sys_sentences, language),
         'Avg. number clauses': get_average_sent(get_ratio_clauses, sys_sentences, language),
         'Avg. max. pos. freq.': get_average_sent(max_pos_in_freq_table, sys_sentences, language),
         'Avg. avg. pos. freq.': get_average_sent(average_pos_in_freq_table, sys_sentences, language),
+        'Lexical complexity score': get_average_sent(get_wordrank_score, sys_sentences, language
+        ),
     }
